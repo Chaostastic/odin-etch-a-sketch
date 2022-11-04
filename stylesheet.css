@@ -1,0 +1,41 @@
+body {
+    height: 100vh;
+    background-color: rgb(17 24 39);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 48px;
+    font-weight: 800;
+    margin: 32px;
+}
+
+.resolution {
+    color: white;
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.grid {
+    width: 512px;
+    height: 512px;
+    background-color: rgb(31 41 55);
+    padding: 64px;
+    border-radius: 20px;
+}
+
+.grid-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pixel {
+    flex: 0 0 auto;
+    background-color: white;
+    width: 256px;
+    height: 256px;
+}
