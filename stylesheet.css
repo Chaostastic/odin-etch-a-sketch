@@ -13,10 +13,13 @@ body {
     margin: 32px;
 }
 
-.resolution {
+.button {
     color: white;
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 400;
+    background-color: rgb(31 41 55);
+    margin: 16px;
+    border-radius: 10px;
 }
 
 .grid {
