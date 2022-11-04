@@ -39,3 +39,7 @@ body {
     width: 256px;
     height: 256px;
 }
+
+.black {
+    background-color: black;
+}
