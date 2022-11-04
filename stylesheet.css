@@ -36,8 +36,6 @@ body {
 .pixel {
     flex: 0 0 auto;
     background-color: white;
-    width: 32px;
-    height: 32px;
 }
 
 .black {
