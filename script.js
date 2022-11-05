@@ -1,3 +1,5 @@
+let selectedColor = "black";
+
 function generateGrid(gridSize) {
     const grid = document.querySelector(".grid");
     removeAllChildNodes(grid);
@@ -35,12 +37,23 @@ function removeAllChildNodes(parent) {
 
 function clearCanvas() {
     const pixels = document.querySelectorAll(".pixel");
-    pixels.forEach(pixel => pixel.classList.remove("black"));
+    pixels.forEach(pixel => pixel.style.background = "white");
 };
 
 function colorPixel() {
-    this.classList.add("black");
+    this.style.background = selectedColor;
 };
+
+function changeColor() {
+    selectedColor = this.dataset.color;
+    colorSelectors.forEach(color => color.classList.remove("selected"));
+    this.classList.add("selected");
+}
+
+function initColors(color) {
+    color.style.background = color.dataset.color;
+    color.addEventListener("click", changeColor);
+}
 
 const resolutionButton = document.querySelector(".resolution");
 resolutionButton.addEventListener("click", changeSize);
@@ -48,5 +61,7 @@ resolutionButton.addEventListener("click", changeSize);
 const clearButton = document.querySelector(".clear");
 clearButton.addEventListener("click", clearCanvas);
 
-generateGrid(16);
+const colorSelectors = document.querySelectorAll(".color");
+colorSelectors.forEach(initColors);
 
+generateGrid(16);
