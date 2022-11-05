@@ -21,7 +21,7 @@ function generateGrid(gridSize) {
 };
 
 function changeSize() {
-    const gridSize = prompt("Choose grid size");
+    const gridSize = Math.trunc(prompt("Choose grid size"));
     if (gridSize > 0 && gridSize <= 100) {
         generateGrid(gridSize);
     } else {
