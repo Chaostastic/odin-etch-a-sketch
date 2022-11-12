@@ -56,10 +56,27 @@ body {
     gap: 8px;
 }
 
+input[type='color'] {
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+input[type='color']::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type='color']::-webkit-color-swatch {
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
 .color {
     height: 24px;
     width: 24px;
-    background-color: white;
     border-radius: 5px;
     border: 2px solid black;
 }
@@ -77,8 +94,4 @@ body {
 .pixel {
     flex: 0 0 auto;
     background-color: white;
-}
-
-.black {
-    background-color: black;
 }
