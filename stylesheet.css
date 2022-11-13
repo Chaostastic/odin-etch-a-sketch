@@ -25,6 +25,8 @@ body {
 .grid {
     width: 640px;
     padding: 64px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .grid,

@@ -2,19 +2,15 @@ let selectedColor = "black";
 
 function generateGrid(gridSize) {
     const grid = document.querySelector(".grid");
+    const pixelCount = Math.pow(gridSize, 2);
     removeAllChildNodes(grid);
     resolutionButton.textContent = "Resolution: " + gridSize + "x" + gridSize;
-    for (let rowIndex = 1; rowIndex <= gridSize; rowIndex++) {
-        const gridRow = document.createElement("div");
-        gridRow.classList.add("grid-row");
-        grid.appendChild(gridRow);
-        for (let pixelIndex = 1; pixelIndex <= gridSize; ++pixelIndex) {
-            const pixel = document.createElement("div");
-            pixel.classList.add("pixel");
-            pixel.style.height = 512 / gridSize + "px";
-            pixel.style.width = 512 / gridSize + "px";
-            gridRow.appendChild(pixel);
-        };
+    for (let i = 1; i <= pixelCount; i++) {
+        const pixel = document.createElement("div");
+        pixel.classList.add("pixel");
+        pixel.style.height = 512 / gridSize + "px";
+        pixel.style.width = 512 / gridSize + "px";
+        grid.appendChild(pixel);
     };
     const pixels = document.querySelectorAll(".pixel");
     pixels.forEach(pixel => pixel.addEventListener("mouseenter", colorPixel));
