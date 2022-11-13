@@ -10,10 +10,9 @@
             <div class="logo">Etch-a-Sketch</div>
             <div class="container">
                 <div class="controls">
-                    Controls
-                    <button class="resolution button">Resolution: 2x2</button>
-                    <button class="clear button">Clear Canvas</button>
-                    Preset colors
+                    <div class="text resolution">Resolution: 16x16</div>
+                    <input type="range" min="1" max="100" value="16">
+                    <div class="text">Preset colors</div>
                     <div class="colors-container">
                         <div data-color="black" class="color selected"></div>
                         <div data-color="white" class="color"></div>
@@ -25,10 +24,11 @@
                         <div data-color="orange" class="color"></div>
                         <div data-color="#512d10" class="color"></div>
                     </div>
-                    Custom colors
+                    <div class="text">Custom colors</div>
                     <div class="custom colors-container">
                         <input type="color" value="#ffffff">
                     </div>
+                    <button class="clear button">Clear Canvas</button>
                 </div>
                 <div class="grid"></div>
             </div>

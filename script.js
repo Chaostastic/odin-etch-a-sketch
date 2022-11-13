@@ -4,7 +4,6 @@ function generateGrid(gridSize) {
     const grid = document.querySelector(".grid");
     const pixelCount = Math.pow(gridSize, 2);
     removeAllChildNodes(grid);
-    resolutionButton.textContent = "Resolution: " + gridSize + "x" + gridSize;
     for (let i = 1; i <= pixelCount; i++) {
         const pixel = document.createElement("div");
         pixel.classList.add("pixel");
@@ -16,8 +15,8 @@ function generateGrid(gridSize) {
     pixels.forEach(pixel => pixel.addEventListener("mouseenter", colorPixel));
 };
 
-function changeSize() {
-    const gridSize = Math.trunc(prompt("Choose grid size"));
+function changeSize(event) {
+    const gridSize = event.target.value
     if (gridSize > 0 && gridSize <= 100) {
         generateGrid(gridSize);
     } else {
@@ -59,11 +58,18 @@ function addColor(event) {
     initColor(color);
     customColors.appendChild(color);
     colorSelectors = document.querySelectorAll(".color");
-    changeColor(color)
+    changeColor(color);
 }
 
-const resolutionButton = document.querySelector(".resolution");
-resolutionButton.addEventListener("click", changeSize);
+function displayResolution(event) {
+    const input = event.target.value
+    console.log(input)
+    document.querySelector(".resolution").textContent = "Resolution: " + input + "x" + input;
+}
+
+const resolutionInput = document.querySelector("input[type='range']");
+resolutionInput.addEventListener("change", changeSize);
+resolutionInput.addEventListener("input", displayResolution);
 
 const clearButton = document.querySelector(".clear");
 clearButton.addEventListener("click", clearCanvas);
@@ -71,7 +77,7 @@ clearButton.addEventListener("click", clearCanvas);
 let colorSelectors = document.querySelectorAll(".color");
 colorSelectors.forEach(initColor);
 
-const customColorInput = document.querySelector('input[type="color"]')
-customColorInput.addEventListener("change", addColor)
+const customColorInput = document.querySelector("input[type='color']")
+customColorInput.addEventListener("change", addColor);
 
 generateGrid(16);

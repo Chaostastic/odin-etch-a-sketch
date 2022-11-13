@@ -12,14 +12,17 @@ body {
 }
 
 .controls {
-    font-size: 32px;
-    font-weight: 700;
     width: 256px;
     padding: 16px;
     margin-right: 16px;
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+
+.controls .text {
+    font-size: 24px;
+    font-weight: 600;
 }
 
 .grid {
@@ -49,7 +52,7 @@ body {
     font-weight: 500;
     background-color: rgb(31 41 55);
     border-radius: 10px;
-    border-color: orange;
+    border-color: white;
 }
 
 .colors-container {
@@ -85,12 +88,6 @@ input[type='color']::-webkit-color-swatch {
 
 .color.selected {
     border-color: white;
-}
-
-.grid-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .pixel {
