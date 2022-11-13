@@ -17,11 +17,7 @@ function generateGrid(gridSize) {
 
 function changeSize(event) {
     const gridSize = event.target.value
-    if (gridSize > 0 && gridSize <= 100) {
-        generateGrid(gridSize)
-    } else {
-        alert("Invalid input!")
-    }
+    generateGrid(gridSize)
 }
 
 function removeAllChildNodes(parent) {
