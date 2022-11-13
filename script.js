@@ -35,8 +35,8 @@ function clearCanvas() {
     pixels.forEach(pixel => pixel.style.background = "white")
 }
 
-function colorPixel() {
-    this.style.background = selectedColor
+function colorPixel(event) {
+    event.target.style.background = selectedColor
 }
 
 function changeColor(color) {
