@@ -44,15 +44,26 @@ function colorPixel() {
     this.style.background = selectedColor;
 };
 
-function changeColor() {
-    selectedColor = this.dataset.color;
+function changeColor(color) {
+    selectedColor = color.dataset.color;
     colorSelectors.forEach(color => color.classList.remove("selected"));
-    this.classList.add("selected");
+    color.classList.add("selected");
 }
 
-function initColors(color) {
+function initColor(color) {
     color.style.background = color.dataset.color;
-    color.addEventListener("click", changeColor);
+    color.addEventListener("click", event => changeColor(event.target));
+}
+
+function addColor(event) {
+    const customColors = document.querySelector(".custom.colors-container");
+    const color = document.createElement("div");
+    color.classList.add("color");
+    color.dataset.color = event.target.value;
+    initColor(color);
+    customColors.appendChild(color);
+    colorSelectors = document.querySelectorAll(".color");
+    changeColor(color)
 }
 
 const resolutionButton = document.querySelector(".resolution");
@@ -61,7 +72,10 @@ resolutionButton.addEventListener("click", changeSize);
 const clearButton = document.querySelector(".clear");
 clearButton.addEventListener("click", clearCanvas);
 
-const colorSelectors = document.querySelectorAll(".color");
-colorSelectors.forEach(initColors);
+let colorSelectors = document.querySelectorAll(".color");
+colorSelectors.forEach(initColor);
+
+const customColorInput = document.querySelector('input[type="color"]')
+customColorInput.addEventListener("change", addColor)
 
 generateGrid(16);
