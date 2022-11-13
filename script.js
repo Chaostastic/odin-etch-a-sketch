@@ -56,9 +56,12 @@ function addColor(event) {
     color.classList.add("color")
     color.dataset.color = event.target.value
     initColor(color)
-    customColors.appendChild(color)
+    customColorInput.after(color)
     colorSelectors = document.querySelectorAll(".color")
     changeColor(color)
+    if (customColors.childElementCount > 17) {
+        customColors.removeChild(customColors.lastChild)
+    }
 }
 
 function displayResolution(event) {
