@@ -1,9 +1,8 @@
 let pixelList
 let mouseDown
 let selectedColor = document.querySelector(".color.selected")
-const rainbowButton = document.querySelector(".rainbow")
 const clearButton = document.querySelector(".clear")
-const colorSelectorList = document.querySelectorAll(".color.static")
+const colorSelectorList = document.querySelectorAll(".color")
 const resolutionInput = document.querySelector("input[type='range']")
 const customColorInput = document.querySelector("input[type='color']")
 
@@ -60,7 +59,6 @@ function addColor(event) {
     const customColors = document.querySelector(".custom.colors-container")
     const newColorSelector = document.createElement("div")
     newColorSelector.classList.add("color")
-    newColorSelector.classList.add("static")
     newColorSelector.dataset.color = event.target.value
     initColor(newColorSelector)
     customColorInput.after(newColorSelector)
@@ -88,7 +86,6 @@ resolutionInput.addEventListener("change", event => generateGrid(event.target.va
 resolutionInput.addEventListener("input", displayResolution)
 customColorInput.addEventListener("change", addColor)
 clearButton.addEventListener("click", clearCanvas)
-rainbowButton.addEventListener("click", event => selectColor(event.target))
 colorSelectorList.forEach(initColor)
 
 generateGrid(16)
