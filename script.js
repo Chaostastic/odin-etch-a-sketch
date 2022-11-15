@@ -19,7 +19,8 @@ function generateGrid(gridSize) {
         grid.appendChild(pixel)
     }
     pixelList = document.querySelectorAll(".pixel")
-    pixelList.forEach(pixel => pixel.addEventListener("mouseenter", colorPixel))
+    pixelList.forEach(pixel => pixel.addEventListener("mouseover", colorPixel))
+    pixelList.forEach(pixel => pixel.addEventListener("mousedown", colorPixel))
 }
 
 function removeAllChildNodes(parent) {
@@ -33,9 +34,8 @@ function clearCanvas() {
 }
 
 function colorPixel(event) {
-    if (mouseDown) {
-        event.target.style.background = selectedColorValue
-    }
+    if (event.type === "mouseover" && !mouseDown) return
+    event.target.style.background = selectedColorValue
 }
 
 function selectColor(color) {
@@ -68,8 +68,8 @@ function displayResolution(event) {
     document.querySelector(".resolution").textContent = "Resolution: " + input + "x" + input
 }
 
-document.addEventListener('mousedown', () => mouseDown = true);
-document.addEventListener('mouseup', () => mouseDown = false);
+document.addEventListener("mousedown", () => mouseDown = true);
+document.addEventListener("mouseup", () => mouseDown = false);
 resolutionInput.addEventListener("change", event => generateGrid(event.target.value))
 resolutionInput.addEventListener("input", displayResolution)
 customColorInput.addEventListener("change", addColor)
