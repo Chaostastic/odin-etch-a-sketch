@@ -1,4 +1,10 @@
-let selectedColor = "black"
+let selectedColorValue = "black"
+let pixelList
+let selectedColor = document.querySelector(".color.selected")
+const clearButton = document.querySelector(".clear")
+const colorSelectorList = document.querySelectorAll(".color")
+const resolutionInput = document.querySelector("input[type='range']")
+const customColorInput = document.querySelector("input[type='color']")
 
 function generateGrid(gridSize) {
     const grid = document.querySelector(".grid")
@@ -11,13 +17,8 @@ function generateGrid(gridSize) {
         pixel.style.width = 512 / gridSize + "px"
         grid.appendChild(pixel)
     }
-    const pixels = document.querySelectorAll(".pixel")
-    pixels.forEach(pixel => pixel.addEventListener("mouseenter", colorPixel))
-}
-
-function changeSize(event) {
-    const gridSize = event.target.value
-    generateGrid(gridSize)
+    pixelList = document.querySelectorAll(".pixel")
+    pixelList.forEach(pixel => pixel.addEventListener("mouseenter", colorPixel))
 }
 
 function removeAllChildNodes(parent) {
@@ -27,34 +28,33 @@ function removeAllChildNodes(parent) {
 }
 
 function clearCanvas() {
-    const pixels = document.querySelectorAll(".pixel")
-    pixels.forEach(pixel => pixel.style.background = "white")
+    pixelList.forEach(pixel => pixel.style.background = "white")
 }
 
 function colorPixel(event) {
-    event.target.style.background = selectedColor
+    event.target.style.background = selectedColorValue
 }
 
-function changeColor(color) {
-    selectedColor = color.dataset.color
-    colorSelectors.forEach(color => color.classList.remove("selected"))
-    color.classList.add("selected")
+function selectColor(color) {
+    selectedColor.classList.remove("selected")
+    selectedColor = color
+    selectedColorValue = selectedColor.dataset.color
+    selectedColor.classList.add("selected")
 }
 
 function initColor(color) {
     color.style.background = color.dataset.color
-    color.addEventListener("click", event => changeColor(event.target))
+    color.addEventListener("click", event => selectColor(event.target))
 }
 
 function addColor(event) {
     const customColors = document.querySelector(".custom.colors-container")
-    const color = document.createElement("div")
-    color.classList.add("color")
-    color.dataset.color = event.target.value
-    initColor(color)
-    customColorInput.after(color)
-    colorSelectors = document.querySelectorAll(".color")
-    changeColor(color)
+    const newColorSelector = document.createElement("div")
+    newColorSelector.classList.add("color")
+    newColorSelector.dataset.color = event.target.value
+    initColor(newColorSelector)
+    customColorInput.after(newColorSelector)
+    selectColor(newColorSelector)
     if (customColors.childElementCount > 17) {
         customColors.removeChild(customColors.lastChild)
     }
@@ -62,21 +62,13 @@ function addColor(event) {
 
 function displayResolution(event) {
     const input = event.target.value
-    console.log(input)
     document.querySelector(".resolution").textContent = "Resolution: " + input + "x" + input
 }
 
-const resolutionInput = document.querySelector("input[type='range']")
-resolutionInput.addEventListener("change", changeSize)
+resolutionInput.addEventListener("change", event => generateGrid(event.target.value))
 resolutionInput.addEventListener("input", displayResolution)
-
-const clearButton = document.querySelector(".clear")
-clearButton.addEventListener("click", clearCanvas)
-
-let colorSelectors = document.querySelectorAll(".color")
-colorSelectors.forEach(initColor)
-
-const customColorInput = document.querySelector("input[type='color']")
 customColorInput.addEventListener("change", addColor)
+clearButton.addEventListener("click", clearCanvas)
+colorSelectorList.forEach(initColor)
 
 generateGrid(16)
