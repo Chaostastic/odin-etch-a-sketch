@@ -7,8 +7,11 @@ Learned from this project:
 - input type="color"
 - input type="range"
 - "mouseenter" eventListener
+- "mousedown" eventListener
+- "mouseup" eventListener
 - "input" eventListener
 - "change" eventListener
 - passing event to function
+- node.firstChild
 - node.lastChild
 - node.childElementCount

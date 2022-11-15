@@ -1,5 +1,6 @@
 let selectedColorValue = "black"
 let pixelList
+let mouseDown
 let selectedColor = document.querySelector(".color.selected")
 const clearButton = document.querySelector(".clear")
 const colorSelectorList = document.querySelectorAll(".color")
@@ -32,7 +33,9 @@ function clearCanvas() {
 }
 
 function colorPixel(event) {
-    event.target.style.background = selectedColorValue
+    if (mouseDown) {
+        event.target.style.background = selectedColorValue
+    }
 }
 
 function selectColor(color) {
@@ -65,6 +68,8 @@ function displayResolution(event) {
     document.querySelector(".resolution").textContent = "Resolution: " + input + "x" + input
 }
 
+document.addEventListener('mousedown', () => mouseDown = true);
+document.addEventListener('mouseup', () => mouseDown = false);
 resolutionInput.addEventListener("change", event => generateGrid(event.target.value))
 resolutionInput.addEventListener("input", displayResolution)
 customColorInput.addEventListener("change", addColor)
