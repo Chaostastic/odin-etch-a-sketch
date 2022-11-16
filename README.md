@@ -16,3 +16,5 @@ Learned from this project:
 - node.lastChild
 - node.childElementCount
 - regex
+- overlaying elements
+- pointer-events: none;

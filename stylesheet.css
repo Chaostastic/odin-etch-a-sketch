@@ -61,6 +61,23 @@ body {
     gap: 8px;
 }
 
+.color-input {
+    position: relative;
+}
+
+.overlay {
+    pointer-events: none;
+    position: absolute;
+    color: black;
+    font-size: 32px;
+    font-weight: 900;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 input[type='color'] {
     appearance: none;
     width: 28px;

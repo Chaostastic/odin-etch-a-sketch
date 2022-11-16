@@ -64,7 +64,7 @@ function addColor(event) {
     newColorSelector.classList.add("color")
     newColorSelector.style.backgroundColor = event.target.value
     initColor(newColorSelector)
-    customColorInput.after(newColorSelector)
+    document.querySelector(".color-input").after(newColorSelector)
     selectColor(newColorSelector)
     if (customColors.childElementCount > 17) {
         customColors.removeChild(customColors.lastChild)
