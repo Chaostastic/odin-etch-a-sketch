@@ -18,3 +18,4 @@ Learned from this project:
 - regex
 - overlaying elements
 - pointer-events: none;
+- text-shadow
