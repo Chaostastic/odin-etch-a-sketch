@@ -1,12 +1,16 @@
 let pixelList
 let mouseDown
 let selectedColor = document.querySelector(".color.selected")
+
 const clearButton = document.querySelector(".clear")
 const colorSelectorList = document.querySelectorAll(".color")
 const resolutionInput = document.querySelector("input[type='range']")
 const customColorInput = document.querySelector("input[type='color']")
 
-let getColor = () => "black"
+const DEFAULTCOLOR = "rgb(0 0 0)"
+const DEFAULTBACKGROUND = "rgb(255 255 255)"
+
+let getColor = () => DEFAULTCOLOR
 
 function generateGrid(gridSize) {
     const grid = document.querySelector(".grid")
@@ -15,6 +19,7 @@ function generateGrid(gridSize) {
     for (let i = 1; i <= pixelCount; i++) {
         const pixel = document.createElement("div")
         pixel.classList.add("pixel")
+        pixel.style.backgroundColor = DEFAULTBACKGROUND
         pixel.style.height = 512 / gridSize + "px"
         pixel.style.width = 512 / gridSize + "px"
         grid.appendChild(pixel)
@@ -45,13 +50,12 @@ function selectColor(color) {
     if (selectedColor.classList.contains("rainbow")) {
         getColor = rainbowColor
     } else {
-        getColor = () => selectedColor.dataset.color
+        getColor = () => selectedColor.style.backgroundColor
     }
     selectedColor.classList.add("selected")
 }
 
 function initColor(color) {
-    color.style.background = color.dataset.color
     color.addEventListener("click", event => selectColor(event.target))
 }
 
