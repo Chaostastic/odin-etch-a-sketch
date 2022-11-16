@@ -41,7 +41,8 @@ function clearCanvas() {
 
 function colorPixel(event) {
     if (event.type === "mouseover" && !mouseDown) return
-    event.target.style.background = getColor()
+    const currentColor = event.target.style.backgroundColor
+    event.target.style.background = getColor(currentColor)
 }
 
 function selectColor(color) {
@@ -49,21 +50,19 @@ function selectColor(color) {
     selectedColor = color
     if (selectedColor.classList.contains("rainbow")) {
         getColor = rainbowColor
+    } else if (selectedColor.classList.contains("shade")) {
+        getColor = shade
     } else {
         getColor = () => selectedColor.style.backgroundColor
     }
     selectedColor.classList.add("selected")
 }
 
-function initColor(color) {
-    color.addEventListener("click", event => selectColor(event.target))
-}
-
 function addColor(event) {
     const customColors = document.querySelector(".custom.colors-container")
     const newColorSelector = document.createElement("div")
     newColorSelector.classList.add("color")
-    newColorSelector.dataset.color = event.target.value
+    newColorSelector.style.backgroundColor = event.target.value
     initColor(newColorSelector)
     customColorInput.after(newColorSelector)
     selectColor(newColorSelector)
@@ -72,16 +71,36 @@ function addColor(event) {
     }
 }
 
-function displayResolution(event) {
-    const input = event.target.value
-    document.querySelector(".resolution").textContent = "Resolution: " + input + "x" + input
-}
-
 function rainbowColor() {
     const red = Math.floor(Math.random() * 255)
     const green = Math.floor(Math.random() * 255)
     const blue = Math.floor(Math.random() * 255)
     return `rgb(${red} ${green} ${blue})`
+}
+
+// split rbg string into individual r, g and b number values and return as array
+function rgbSplit(rgb) {
+    return rgb.replace(/[^\d\s]/g,"").split(" ").map((str) => +str)
+}
+
+function subToZero(min, sub) {
+    const result = min - sub
+    return result < 0 ? 0 : result
+}
+
+function shade(rgb) {
+    //subtract 25 from each color value
+    const [red, green, blue] = rgbSplit(rgb).map((int) => subToZero(int, 25))
+    return `rgb(${red} ${green} ${blue})`
+}
+
+function displayResolution(event) {
+    const input = event.target.value
+    document.querySelector(".resolution").textContent = "Resolution: " + input + "x" + input
+}
+
+function initColor(color) {
+    color.addEventListener("click", event => selectColor(event.target))
 }
 
 document.addEventListener("mousedown", () => mouseDown = true);

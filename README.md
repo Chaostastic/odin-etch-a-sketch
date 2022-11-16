@@ -15,3 +15,4 @@ Learned from this project:
 - node.firstChild
 - node.lastChild
 - node.childElementCount
+- regex
