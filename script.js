@@ -36,7 +36,7 @@ function removeAllChildNodes(parent) {
 }
 
 function clearCanvas() {
-    pixelList.forEach(pixel => pixel.style.background = "white")
+    pixelList.forEach(pixel => pixel.style.background = DEFAULTBACKGROUND)
 }
 
 function colorPixel(event) {
