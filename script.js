@@ -1,6 +1,4 @@
-let pixelList
 let mouseDown
-let selectedColor = document.querySelector(".color.selected")
 
 const clearButton = document.querySelector(".clear")
 const colorSelectorList = document.querySelectorAll(".color")
@@ -15,27 +13,20 @@ let getColor = () => DEFAULTCOLOR
 function generateGrid(gridSize) {
     const grid = document.querySelector(".grid")
     const pixelCount = Math.pow(gridSize, 2)
-    removeAllChildNodes(grid)
+    grid.innerHTML = ""
     grid.style.setProperty("--pixel-size", 512 / gridSize + "px")
     for (let i = 1; i <= pixelCount; i++) {
         const pixel = document.createElement("div")
         pixel.classList.add("pixel")
-        pixel.style.backgroundColor = DEFAULTBACKGROUND
+        pixel.style.background = DEFAULTBACKGROUND
+        pixel.addEventListener("mouseover", colorPixel)
+        pixel.addEventListener("mousedown", colorPixel)
         grid.appendChild(pixel)
-    }
-    pixelList = document.querySelectorAll(".pixel")
-    pixelList.forEach(pixel => pixel.addEventListener("mouseover", colorPixel))
-    pixelList.forEach(pixel => pixel.addEventListener("mousedown", colorPixel))
-}
-
-function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild)
     }
 }
 
 function clearCanvas() {
-    pixelList.forEach(pixel => pixel.style.background = DEFAULTBACKGROUND)
+    document.querySelectorAll(".pixel").forEach(pixel => pixel.style.background = DEFAULTBACKGROUND)
 }
 
 function colorPixel(event) {
@@ -44,17 +35,20 @@ function colorPixel(event) {
     event.target.style.background = getColor(currentColor)
 }
 
-function selectColor(color) {
-    selectedColor.classList.remove("selected")
-    selectedColor = color
-    if (selectedColor.classList.contains("rainbow")) {
-        getColor = rainbowColor
-    } else if (selectedColor.classList.contains("shade")) {
-        getColor = shade
-    } else {
-        getColor = () => selectedColor.style.backgroundColor
+function selectColor(colorSelector) {
+    document.querySelector(".color.selected").classList.remove("selected")
+    colorSelector.classList.add("selected")
+    switch (colorSelector.id) {
+        case "rainbow": 
+            getColor = rainbowColor
+            break
+        case "shade":
+            getColor = shade
+            break
+        default:
+            const color = colorSelector.style.backgroundColor
+            getColor = () => color
     }
-    selectedColor.classList.add("selected")
 }
 
 function addColor(event) {
@@ -63,8 +57,8 @@ function addColor(event) {
     newColorSelector.classList.add("color")
     newColorSelector.style.backgroundColor = event.target.value
     initColor(newColorSelector)
-    document.querySelector(".color-input").after(newColorSelector)
     selectColor(newColorSelector)
+    document.querySelector(".color-input").after(newColorSelector)
     if (customColors.childElementCount > 17) {
         customColors.removeChild(customColors.lastChild)
     }
@@ -98,8 +92,8 @@ function displayResolution(event) {
     document.querySelector(".resolution").textContent = "Resolution: " + input + "x" + input
 }
 
-function initColor(color) {
-    color.addEventListener("click", event => selectColor(event.target))
+function initColor(colorSelector) {
+    colorSelector.addEventListener("click", event => selectColor(event.target))
 }
 
 document.addEventListener("mousedown", () => mouseDown = true);
