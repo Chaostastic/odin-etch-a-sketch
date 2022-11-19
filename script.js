@@ -16,12 +16,11 @@ function generateGrid(gridSize) {
     const grid = document.querySelector(".grid")
     const pixelCount = Math.pow(gridSize, 2)
     removeAllChildNodes(grid)
+    grid.style.setProperty("--pixel-size", 512 / gridSize + "px")
     for (let i = 1; i <= pixelCount; i++) {
         const pixel = document.createElement("div")
         pixel.classList.add("pixel")
         pixel.style.backgroundColor = DEFAULTBACKGROUND
-        pixel.style.height = 512 / gridSize + "px"
-        pixel.style.width = 512 / gridSize + "px"
         grid.appendChild(pixel)
     }
     pixelList = document.querySelectorAll(".pixel")

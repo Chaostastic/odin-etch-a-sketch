@@ -19,3 +19,4 @@ Learned from this project:
 - overlaying elements
 - pointer-events: none;
 - text-shadow
+- css variables
